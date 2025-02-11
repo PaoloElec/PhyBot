@@ -7,7 +7,7 @@ genai.configure(api_key="AIzaSyDoxAmNP_00COyHDfBoYTwXGP74_E8tXbc")  # 🔹 Reemp
 # Configurar el modelo de IA
 modelo = genai.GenerativeModel("gemini-pro")
 
-st.title("Chatbot de Equipos Médicos 🤖")
+st.title("Phybot: El assitente virtual de Phymed 🤖")
 
 # Entrada del usuario
 user_input = st.text_input("Haz una pregunta sobre equipos médicos:")
