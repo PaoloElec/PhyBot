@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Feb 11 12:38:54 2025
 
-@author: Claudio
-"""
+import openai
 
-import streamlit as st
+openai.api_key = "TU_CLAVE_AQUI"  # Reemplaza con tu clave real
 
-st.title("Chatbot de Equipos Médicos")
+response = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "Hola, ¿cómo estás?"}]
+)
 
-user_input = st.text_input("Escribe tu pregunta:")
-if user_input:
-    st.write(f"Respuesta del chatbot para: {user_input}")
+print(response["choices"][0]["message"]["content"])
+
