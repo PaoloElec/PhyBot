@@ -1,20 +1,21 @@
 import streamlit as st
-import openai
+import google.generativeai as genai
 
-# Configurar la API Key (reemplázala con la tuya)
-openai.api_key = "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"
+# Configurar API Key de Gemini
+genai.configure(api_key="AIzaSyDoxAmNP_00COyHDfBoYTwXGP74_E8tXbc")  # 🔹 Reemplázala con tu clave de Google AI
+
+# Configurar el modelo de IA
+modelo = genai.GenerativeModel("gemini-pro")
 
 st.title("Chatbot de Equipos Médicos 🤖")
 
 # Entrada del usuario
 user_input = st.text_input("Haz una pregunta sobre equipos médicos:")
 
-# Llamada a OpenAI para generar respuesta
+# Llamada a Gemini para generar respuesta
 if user_input:
-    response = openai.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": user_input}]
-    )
-    st.write(response.choices[0].message.content)
+    respuesta = modelo.generate_content(user_input)
+    st.write(respuesta.text)
+
 
 
