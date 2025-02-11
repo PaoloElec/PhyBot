@@ -1,3 +1,2 @@
-openai
-pip install google-generativeai
-
+google-generativeai
+streamlit
