@@ -3,13 +3,15 @@ import google.generativeai as genai
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-# Configurar Firebase
-cred = credentials.Certificate("phybot-8bba6-firebase-adminsdk-fbsvc-cabdc938e6.json")  # 🔹 Reemplázalo con tu archivo JSON
-firebase_admin.initialize_app(cred)
+# Verificar si Firebase ya fue inicializado
+if not firebase_admin._apps:
+    cred = credentials.Certificate("TU_ARCHIVO_JSON.json")  # Reemplázalo con tu archivo JSON
+    firebase_admin.initialize_app(cred)
+
 db = firestore.client()
 
 # Configurar API Key de Gemini
-genai.configure(api_key="AIzaSyDoxAmNP_00COyHDfBoYTwXGP74_E8tXbc")  # 🔹 Reemplázala con tu API Key de Google AI
+genai.configure(api_key="AIzaSyDoxAmNP_00COyHDfBoYTwXGP74_E8tXbc")  # Reemplázala con tu API Key de Google AI
 
 # Configurar el modelo de IA
 modelo = genai.GenerativeModel("gemini-pro")
@@ -25,12 +27,9 @@ if user_input:
     respuesta_texto = respuesta.text
 
     # Guardar en Firebase
-    doc_ref = db.collection("chat_history").add({
+    db.collection("chat_history").add({
         "pregunta": user_input,
         "respuesta": respuesta_texto
     })
 
     st.write(respuesta_texto)
-
-
-
