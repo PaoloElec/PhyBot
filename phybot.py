@@ -4,12 +4,12 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 # Configurar Firebase
-cred = credentials.Certificate("TU_ARCHIVO_JSON.json")  # 🔹 Reemplázalo con tu archivo JSON
+cred = credentials.Certificate("phybot-8bba6-firebase-adminsdk-fbsvc-cabdc938e6.json")  # 🔹 Reemplázalo con tu archivo JSON
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # Configurar API Key de Gemini
-genai.configure(api_key="TU_CLAVE_GEMINI")  # 🔹 Reemplázala con tu API Key de Google AI
+genai.configure(api_key="AIzaSyDoxAmNP_00COyHDfBoYTwXGP74_E8tXbc")  # 🔹 Reemplázala con tu API Key de Google AI
 
 # Configurar el modelo de IA
 modelo = genai.GenerativeModel("gemini-pro")
