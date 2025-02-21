@@ -5,7 +5,7 @@ from firebase_admin import credentials, firestore
 
 # Verificar si Firebase ya fue inicializado
 if not firebase_admin._apps:
-    cred = credentials.Certificate("TU_ARCHIVO_JSON.json")  # Reemplázalo con tu archivo JSON
+    cred = credentials.Certificate("phybot-8bba6-firebase-adminsdk-fbsvc-cabdc938e6.json.json")  # Reemplázalo con tu archivo JSON
     firebase_admin.initialize_app(cred)
 
 db = firestore.client()
