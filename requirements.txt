@@ -1,3 +1,7 @@
 google-generativeai
 streamlit
 firebase-admin
+
+gspread
+google-auth
+pandas
