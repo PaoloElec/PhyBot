@@ -1,29 +1,25 @@
-import streamlit as st
-import google.generativeai as genai
+import gspread
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-# Verificar si Firebase ya fue inicializado
+# 1️⃣ Inicializar Firebase con las credenciales
 if not firebase_admin._apps:
-    cred = credentials.Certificate("phybot-8bba6-firebase-adminsdk-fbsvc-cabdc938e6.json")  # Reemplázalo con tu archivo JSON
+    cred = credentials.Certificate("phybot-8bba6-firebase-adminsdk-fbsvc-cabdc938e6.json")  # Reemplázalo con el JSON de Firebase
     firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-# Configurar API Key de Gemini
-genai.configure(api_key="AIzaSyDoxAmNP_00COyHDfBoYTwXGP74_E8tXbc")  # Reemplázala con tu API Key de Google AI
+# 2️⃣ Conectar con Google Sheets usando las credenciales
+gc = gspread.service_account(filename="hip-sight-451618-m2-e216d96431b0.json")  # Reemplázalo con el JSON de Google Sheets
+spreadsheet = gc.open_by_url("https://docs.google.com/spreadsheets/d/1RGydganymG5apc5PAh4vvQVbFAACZECe/edit?gid=419674014#gid=419674014")  # Reemplázalo con la URL del Google Sheets
+sheet = spreadsheet.sheet1
 
-# Configurar el modelo de IA
-modelo = genai.GenerativeModel("gemini-pro")
+# 3️⃣ Leer los datos de la hoja de cálculo
+data = sheet.get_all_records()
 
-st.title("Chatbot de Equipos Médicos 🤖")
+# 4️⃣ Subir los datos a Firebase
+for row in data:
+    db.collection("equipos").add(row)
 
-# Entrada del usuario
-user_input = st.text_input("Haz una pregunta sobre equipos médicos:")
+print("✅ Datos subidos correctamente a Firebase")
 
-# Llamada a Gemini y guardado en Firebase
-if user_input:
-    respuesta = modelo.generate_content(user_input)
-    respuesta_texto = respuesta.text
-
-st.write(respuesta_texto)
