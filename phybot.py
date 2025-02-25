@@ -26,10 +26,4 @@ if user_input:
     respuesta = modelo.generate_content(user_input)
     respuesta_texto = respuesta.text
 
-    '''# Guardar en Firebase
-    db.collection("chat_history").add({
-        "pregunta": user_input,
-        "respuesta": respuesta_texto
-    })
-    '''
-    st.write(respuesta_texto)
+st.write(respuesta_texto)
