@@ -5,15 +5,15 @@ from googleapiclient.discovery import build
 from google.oauth2 import service_account
 
 # Cargar credenciales de Google Sheets (Asegúrate de subir este archivo JSON a tu repositorio)
-GOOGLE_SHEETS_CREDENTIALS_FILE = "requirements/google_sheets_credentials.json"
+GOOGLE_SHEETS_CREDENTIALS_FILE = "hip-sight-451618-m2-e216d96431b0.json"
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
 # ID de tu Google Sheets (lo encuentras en la URL de tu hoja de cálculo)
-SPREADSHEET_ID = "TU_GOOGLE_SHEETS_ID"
-RANGE_NAME = "Hoja1!A1:Z1000"  # Ajusta según tu hoja
+SPREADSHEET_ID = "419674014"
+RANGE_NAME = "Hoja1!A1:T200"  # Ajusta según tu hoja
 
 # Cargar credenciales de Firebase (Asegúrate de subir este archivo JSON a tu repositorio)
-FIREBASE_CREDENTIALS_FILE = "requirements/firebase_credentials.json"
+FIREBASE_CREDENTIALS_FILE = "phybot-8bba6-firebase-adminsdk-fbsvc-cabdc938e6.json"
 
 # Inicializar Firebase
 cred = credentials.Certificate(FIREBASE_CREDENTIALS_FILE)
