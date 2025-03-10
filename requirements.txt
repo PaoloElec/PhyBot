@@ -2,7 +2,7 @@ google-generativeai
 streamlit
 firebase-admin
 
-openai
+openai>=0.27.0
 gspread
 pandas
 
