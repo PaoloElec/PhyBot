@@ -1,25 +1,23 @@
-import gspread
-import firebase_admin
-from firebase_admin import credentials, firestore
+import openai
+import streamlit as st
 
-# 1️⃣ Inicializar Firebase con las credenciales
-if not firebase_admin._apps:
-    cred = credentials.Certificate("phybot-8bba6-firebase-adminsdk-fbsvc-cabdc938e6.json")  # Reemplázalo con el JSON de Firebase
-    firebase_admin.initialize_app(cred)
+# Configura la clave de OpenAI
+openai.api_key = "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"
 
-db = firestore.client()
+st.title("Chatbot con ChatGPT")
 
-# 2️⃣ Conectar con Google Sheets usando las credenciales
-gc = gspread.service_account(filename="hip-sight-451618-m2-e216d96431b0.json")  # Reemplázalo con el JSON de Google Sheets
-spreadsheet = gc.open_by_url("https://docs.google.com/spreadsheets/d/1RGydganymG5apc5PAh4vvQVbFAACZECe/edit?gid=419674014#gid=419674014")  # Reemplázalo con la URL del Google Sheets
-sheet = spreadsheet.sheet1
+user_input = st.text_input("Dime algo:")
+if st.button("Enviar") and user_input:
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "user", "content": user_input}
+            ]
+        )
+        answer = response['choices'][0]['message']['content']
+        st.text_area("Respuesta", value=answer, height=200)
+    except Exception as e:
+        st.error(f"Error: {str(e)}")
 
-# 3️⃣ Leer los datos de la hoja de cálculo
-data = sheet.get_all_records()
-
-# 4️⃣ Subir los datos a Firebase
-for row in data:
-    db.collection("equipos").add(row)
-
-print("✅ Datos subidos correctamente a Firebase")
 
