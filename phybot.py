@@ -10,7 +10,8 @@ user_input = st.text_input("Dime algo:")
 if st.button("Enviar") and user_input:
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
+            store=True,
             messages=[
                 {"role": "user", "content": user_input}
             ]
